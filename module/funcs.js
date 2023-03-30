@@ -96,7 +96,7 @@ const getAlunosCurso = (curso) => {
 
         aluno.curso.forEach((nomeCurso) => {
 
-            if (nomeCurso.sigla.toUpperCase() == curso.toUpperCase()) {
+            if (nomeCurso.sigla == curso) {
                 let JSONAlunos = {}
 
                 JSONAlunos.foto = aluno.foto
@@ -126,7 +126,7 @@ const getStatus = (status) => {
 
             curso.disciplinas.forEach((disciplina) => {
 
-                if (disciplina.status.toUpperCase() == status.toUpperCase()) {
+                if (disciplina.status == status) {
                     let JSONAlunos = {}
 
                     JSONAlunos.aluno = aluno.nome
