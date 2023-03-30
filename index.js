@@ -85,20 +85,18 @@ app.get('/v1/lion-school/alunos', cors(), async (request, response, next) => {
     let dadosAluno = {}
 
 
-    if (cursos == '' || cursos == undefined && status == '' || status == undefined) {
-        retorno = funcs.getListaAlunos()
-        dadosAluno = {"erro": "alunos"}
-        statusCode = 200
-    } else if (cursos == '' || cursos == undefined && status != '' || status != undefined) {
+    if (cursos == undefined && status != undefined) {
         retorno = funcs.getStatus(status)
-        dadosAluno = {"erro": "status"}
+        dadosAluno = retorno
         statusCode = 200
-    } else if (cursos != '' || cursos != undefined && status == '' || status == undefined) {
+    } else if (cursos != undefined && status == undefined) {
         retorno = funcs.getAlunosCurso(cursos)
-        dadosAluno = {"erro": "cursos"}
+        dadosAluno = retorno
         statusCode = 200
     } else {
-        statusCode = 404
+        retorno = funcs.getListaAlunos()
+        dadosAluno = retorno
+        statusCode = 200
     }
 
 
