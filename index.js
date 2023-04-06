@@ -93,10 +93,12 @@ app.get('/v1/lion-school/alunos', cors(), async (request, response, next) => {
         retorno = funcs.getAlunosCurso(cursos)
         dadosAluno = retorno
         statusCode = 200
-    } else {
+    } else if (cursos == undefined && status == undefined || cursos != undefined && status != undefined) {
         retorno = funcs.getListaAlunos()
         dadosAluno = retorno
         statusCode = 200
+    } else {
+        statusCode = 400
     }
 
 

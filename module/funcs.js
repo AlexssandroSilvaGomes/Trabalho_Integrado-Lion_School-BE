@@ -11,6 +11,7 @@ const { json } = require('body-parser')
 const getListaCursos = () => {
     let listaCursos = {}
     let arrayCursos = []
+    let status = false
 
     listaCursos.cursos = arrayCursos
 
@@ -22,10 +23,19 @@ const getListaCursos = () => {
         JSONCursos.icone = curso.icone
 
         arrayCursos.push(JSONCursos)
+        status = true
 
     })
 
-    return listaCursos
+    if(status) {
+
+        return listaCursos
+
+    } else {
+
+        return status
+
+    }
 
 }
 
@@ -34,6 +44,7 @@ const getListaCursos = () => {
 const getListaAlunos = () => {
     let listaAlunos = {}
     let arrayAlunos = []
+    let status = false
 
     listaAlunos.alunos = arrayAlunos
 
@@ -52,9 +63,19 @@ const getListaAlunos = () => {
 
         arrayAlunos.push(JSONAlunos)
 
+        status = true
+
     })
 
-    return listaAlunos
+    if (status) {
+
+        return listaAlunos
+    
+    } else {
+
+        return status
+
+    }
 }
 
 // console.log(getListaAlunos())
@@ -62,6 +83,7 @@ const getListaAlunos = () => {
 const getAlunosMatricula = (matricula) => {
     let listaAlunos = {}
     let arrayAlunos = []
+    let status = false;
 
     listaAlunos.aluno = arrayAlunos
 
@@ -79,10 +101,20 @@ const getAlunosMatricula = (matricula) => {
             })
 
             arrayAlunos.push(JSONAlunos)
+            status = true
         }
     })
 
-    return listaAlunos
+    if (status) {
+
+        return listaAlunos
+    
+    } else {
+
+        return status
+
+    }
+
 }
 
 // console.log(getAlunosMatricula(20151001001))
@@ -90,6 +122,7 @@ const getAlunosMatricula = (matricula) => {
 const getAlunosCurso = (curso) => {
     let listaAlunos = {}
     let arrayAlunos = []
+    let status = false
 
     listaAlunos.aluno = arrayAlunos
 
@@ -97,20 +130,34 @@ const getAlunosCurso = (curso) => {
 
         aluno.curso.forEach((nomeCurso) => {
 
-            if (nomeCurso.sigla.toUpperCase() == curso.toUpperCase()) {
+            if (nomeCurso.sigla == curso) {
                 let JSONAlunos = {}
 
                 JSONAlunos.foto = aluno.foto
                 JSONAlunos.nome = aluno.nome
+                JSONAlunos.matricula = aluno.matricula
+                JSONAlunos.status = aluno.status
+                JSONAlunos.curso = nomeCurso.nome
                 arrayAlunos.push(JSONAlunos)
 
             }
 
         })
 
+        status = true
+
     })
 
-    return listaAlunos
+    if (status) {
+
+        return listaAlunos
+    
+    } else {
+
+        return status
+
+    }
+
 }
 
 // console.log(getAlunosCurso("RDS"))
@@ -118,6 +165,7 @@ const getAlunosCurso = (curso) => {
 const getStatus = (status) => {
     let listaAlunos = {}
     let arrayAlunos = []
+    let statusRes = false
 
     listaAlunos.aluno = arrayAlunos
 
@@ -127,7 +175,7 @@ const getStatus = (status) => {
 
             curso.disciplinas.forEach((disciplina) => {
 
-                if (disciplina.status.toUpperCase() == status.toUpperCase()) {
+                if (disciplina.status == status) {
                     let JSONAlunos = {}
 
                     JSONAlunos.aluno = aluno.nome
@@ -140,9 +188,21 @@ const getStatus = (status) => {
 
             })
         })
+
+        statusRes = true
+
     })
 
-    return listaAlunos
+    if (statusRes) {
+
+        return listaAlunos
+    
+    } else {
+
+        return status
+
+    }
+
 }
 
 // console.log(getStatus("Aprovado"))
