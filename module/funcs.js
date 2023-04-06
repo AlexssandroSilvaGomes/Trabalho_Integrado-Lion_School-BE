@@ -80,6 +80,14 @@ const getListaAlunos = () => {
 
 // console.log(getListaAlunos())
 
+//Função auxiliar que retorna a sigla da disciplina
+const getSiglaDisciplina = (nomeDisciplina) => {
+    let ignorarPreposicoes = nomeDisciplina.replace(/\s(de|da|a|das)\s/g, ' ')
+    const disciplina = ignorarPreposicoes.split(' ')
+    const siglaDisciplina = disciplina.map(disciplina => disciplina.substr(0, 2).toUpperCase());
+    return siglaDisciplina.join('')
+}
+
 const getAlunosMatricula = (matricula) => {
     let listaAlunos = {}
     let arrayAlunos = []
@@ -91,16 +99,34 @@ const getAlunosMatricula = (matricula) => {
 
         if (aluno.matricula == matricula && aluno.matricula != undefined && !isNaN(aluno.matricula) && aluno.matricula.length <= 11) {
             let JSONAlunos = {}
-
+            let arrayDisciplinas = []
+            
             JSONAlunos.foto = aluno.foto
             JSONAlunos.nome = aluno.nome
             JSONAlunos.matricula = aluno.matricula
-            JSONAlunos.sexo = aluno.sexo
+
             aluno.curso.forEach((curso) => {
+
                 JSONAlunos.curso = curso.nome
+
+                curso.disciplinas.forEach((disciplina) => {
+
+                    let JSONDisciplinas = {}
+
+                    JSONDisciplinas.sigla = getSiglaDisciplina(disciplina.nome)
+                    JSONDisciplinas.media = disciplina.media
+                    JSONDisciplinas.status = disciplina.status
+
+                    arrayDisciplinas.push(JSONDisciplinas)
+
+                })
+
+                JSONAlunos.disciplinas = arrayDisciplinas
+
             })
 
             arrayAlunos.push(JSONAlunos)
+
             status = true
         }
     })
