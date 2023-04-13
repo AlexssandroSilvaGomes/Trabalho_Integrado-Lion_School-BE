@@ -55,7 +55,6 @@ const getListaAlunos = () => {
         JSONAlunos.foto = aluno.foto
         JSONAlunos.nome = aluno.nome
         JSONAlunos.matricula = aluno.matricula
-        JSONAlunos.sexo = aluno.sexo
         aluno.curso.forEach((curso) => {
             JSONAlunos.curso = curso.nome
         })
@@ -164,6 +163,7 @@ const getAlunosCurso = (curso) => {
                 JSONAlunos.matricula = aluno.matricula
                 JSONAlunos.status = aluno.status
                 JSONAlunos.curso = nomeCurso.nome
+                JSONAlunos.anoConclusao = nomeCurso.conclusao
                 arrayAlunos.push(JSONAlunos)
 
             }
